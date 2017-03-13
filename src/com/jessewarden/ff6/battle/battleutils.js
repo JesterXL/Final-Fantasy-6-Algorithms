@@ -11,7 +11,7 @@ const {
 	equippedWith2HeroRings,
 	equippedWith1Earring,
 	equippedWith2Earrings
-} = require('./Character');
+} = require('./character');
 
 const PERFECT_HIT_RATE = 255;
 

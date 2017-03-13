@@ -1,7 +1,7 @@
 const Row = require("../enums/Row");
 const _ = require("lodash");
 const {Subject} = require("rx");
-const {BattleTimer, MODE_PLAYER, EFFECT_NORMAL} = require('./battleTimer');
+const {BattleTimer, MODE_PLAYER, EFFECT_NORMAL} = require('./battletimer');
 const BattleState = require('../enums/BattleState');
 const {
 	isGauntlet,
