@@ -6,7 +6,7 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     library: "final-fantasy-6-algorithms",
-    libraryTarget: "commonjs"
+    libraryTarget: "commonjs2"
   },
   externals: {
     "lodash": {
