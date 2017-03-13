@@ -1,3 +1,4 @@
+exports["final-fantasy-6-algorithms"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
