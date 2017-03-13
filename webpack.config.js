@@ -7,5 +7,19 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     library: "final-fantasy-6-algorithms",
     libraryTarget: "commonjs"
+  },
+  externals: {
+    "lodash": {
+      commonjs: "lodash",
+      commonjs2: "lodash",
+      amd: "lodash",
+      root: "_"
+    },
+    "rx": {
+      commonjs: "rx",
+      commonjs2: "rx",
+      amd: "rx",
+      root: "rx"
+    }
   }
 }
