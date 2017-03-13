@@ -1,8 +1,8 @@
 {
-  "name": "Final-Fantasy-6-Algorithms",
+  "name": "final-fantasy-6-algorithms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha src/**/*.test.js",
     "coverage": "nyc --reporter=html --reporter=text mocha src/**/*.test.js",
