@@ -151,6 +151,12 @@ class BattleTimer
 		const me = this;
 		me.timer.stopTimer();
 	}
+
+	resume()
+	{
+		const me = this;
+		me.timer.resume();
+	}
 }
 
 module.exports = {
