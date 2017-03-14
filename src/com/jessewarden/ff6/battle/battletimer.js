@@ -88,7 +88,13 @@ class Timer
 	{
 		const me = this;
 		me.running = false;
-		delete me.tickCallback;
+	}
+
+	resume()
+	{
+		const me = this;
+		me.running = true;
+		me.window.requestAnimationFrame(me.tickBound);
 	}
 }
 
