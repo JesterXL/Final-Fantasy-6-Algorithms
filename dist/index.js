@@ -64,7 +64,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -258,7 +258,7 @@ module.exports = {
 
 const Row = __webpack_require__(4);
 const _ = __webpack_require__(0);
-const {Subject} = __webpack_require__(7);
+const {Subject} = __webpack_require__(8);
 const {BattleTimer, MODE_PLAYER, EFFECT_NORMAL} = __webpack_require__(1);
 const BattleState = __webpack_require__(3);
 const {
@@ -280,7 +280,7 @@ const getCharacter = (entity)=>
 	var vm = {};
 	vm.entity = entity;
 	vm.percentage = 0;
-	vm.name = '';
+	vm.name = 'default';
 	vm.battleState = BattleState.WAITING;
 	vm.hitPoints = 10;
 	vm.vigor = 10;
@@ -301,10 +301,7 @@ const getCharacter = (entity)=>
 	vm.body;
 	vm.relic1;
 	vm.relic2;
-	vm._row = Row.FRONT;
-	vm.id = _INCREMENT++;
-	vm.subject = new Subject();
-	vm.generator = makeBattleTimer(vm);
+	vm.row = Row.FRONT;
 	vm.type = 'Character';
 	vm.characterType = 'player';
 	return vm;
@@ -325,23 +322,6 @@ function makeMonster(entity)
 	chr.characterType = 'monster';
 	chr.entity = entity;
 	return chr;
-}
-
-function makeReadyCharacter(entity)
-{
-	var chr = getCharacter(entity);
-	chr.battleState = BattleState.READY;
-	return chr;
-}
-
-function getRandomMonsterVigor()
-{
-	return BattleUtils.getRandomMonsterVigor();
-}
-
-function makeBattleTimer(chr)
-{
-	return new BattleTimer(0, 0, EFFECT_NORMAL, MODE_PLAYER, chr.speed);
 }
 
 // TODO: figure out reflection/mirrors
@@ -393,37 +373,17 @@ const oneOrZeroWeapons = (chr) =>
 	}
 };
 
-function getRow(chr)
-{
-	return chr._row;
-}
-function setRow(chr, newRow)
-{
-	if(newRow === chr._row)
-	{
-		return;
-	}
-	var oldRow = chr._row;
-	chr._row = newRow;
-	chr.subject.onNext({
-		type: "rowChanged",
-		target: chr,
-		oldRow: oldRow,
-		newRow: newRow
-	});
-}
-
-function toggleRow(chr)
+const toggleRow = chr =>
 {
 	if(chr.row === Row.FRONT)
 	{
-		chr.row = Row.BACK;
+		return Row.BACK;
 	}
 	else
 	{
-		chr.row = Row.FRONT;
+		return Row.FRONT;
 	}
-}
+};
 
 module.exports = {
 	getCharacter,
@@ -1307,10 +1267,24 @@ module.exports = {
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("rx");
+const s4 = ()=> Math
+.floor((1 + Math.random()) * 0x10000)
+.toString(16)
+.substring(1);
+
+const guid = ()=> s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+
+module.exports = guid;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("rx");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -1323,7 +1297,10 @@ module.exports = {
         BattleState: __webpack_require__(3),
         Row: __webpack_require__(4)
     },
-    relics: __webpack_require__(5)
+    relics: __webpack_require__(5),
+    core: {
+        guid: __webpack_require__(7)
+    }
 };
 
 /***/ })

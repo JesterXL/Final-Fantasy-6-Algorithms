@@ -22,7 +22,7 @@ const getCharacter = (entity)=>
 	var vm = {};
 	vm.entity = entity;
 	vm.percentage = 0;
-	vm.name = '';
+	vm.name = 'default';
 	vm.battleState = BattleState.WAITING;
 	vm.hitPoints = 10;
 	vm.vigor = 10;
@@ -43,10 +43,7 @@ const getCharacter = (entity)=>
 	vm.body;
 	vm.relic1;
 	vm.relic2;
-	vm._row = Row.FRONT;
-	vm.id = _INCREMENT++;
-	vm.subject = new Subject();
-	vm.generator = makeBattleTimer(vm);
+	vm.row = Row.FRONT;
 	vm.type = 'Character';
 	vm.characterType = 'player';
 	return vm;
@@ -67,23 +64,6 @@ function makeMonster(entity)
 	chr.characterType = 'monster';
 	chr.entity = entity;
 	return chr;
-}
-
-function makeReadyCharacter(entity)
-{
-	var chr = getCharacter(entity);
-	chr.battleState = BattleState.READY;
-	return chr;
-}
-
-function getRandomMonsterVigor()
-{
-	return BattleUtils.getRandomMonsterVigor();
-}
-
-function makeBattleTimer(chr)
-{
-	return new BattleTimer(0, 0, EFFECT_NORMAL, MODE_PLAYER, chr.speed);
 }
 
 // TODO: figure out reflection/mirrors
@@ -135,37 +115,17 @@ const oneOrZeroWeapons = (chr) =>
 	}
 };
 
-function getRow(chr)
-{
-	return chr._row;
-}
-function setRow(chr, newRow)
-{
-	if(newRow === chr._row)
-	{
-		return;
-	}
-	var oldRow = chr._row;
-	chr._row = newRow;
-	chr.subject.onNext({
-		type: "rowChanged",
-		target: chr,
-		oldRow: oldRow,
-		newRow: newRow
-	});
-}
-
-function toggleRow(chr)
+const toggleRow = chr =>
 {
 	if(chr.row === Row.FRONT)
 	{
-		chr.row = Row.BACK;
+		return Row.BACK;
 	}
 	else
 	{
-		chr.row = Row.FRONT;
+		return Row.FRONT;
 	}
-}
+};
 
 module.exports = {
 	getCharacter,

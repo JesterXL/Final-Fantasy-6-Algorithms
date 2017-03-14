@@ -8,5 +8,8 @@ module.exports = {
         BattleState: require('./enums/BattleState'),
         Row: require('./enums/Row')
     },
-    relics: require('./relics')
+    relics: require('./relics'),
+    core: {
+        guid: require('./core/guid')
+    }
 };
