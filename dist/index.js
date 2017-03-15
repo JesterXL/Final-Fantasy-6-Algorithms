@@ -388,7 +388,6 @@ const toggleRow = chr =>
 module.exports = {
 	getCharacter,
     makePlayer,
-    makeReadyCharacter,
     equippedWithNoRelics,
     equippedWithGauntlet,
     rightHandHasWeapon,
